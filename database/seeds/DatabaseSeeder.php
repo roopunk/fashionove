@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call('CityTableSeeder');
         $this->call('BrandTableSeeder');
         $this->call('StoreTableSeeder');
+        $this->call('CategoryTableSeeder');
 
         Model::reguard();
     }
