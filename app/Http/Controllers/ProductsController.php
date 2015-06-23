@@ -40,6 +40,7 @@ class ProductsController extends Controller
     {
 
         Product::create($request->all());
+        return redirect('admin/products');
     }
 
     /**
