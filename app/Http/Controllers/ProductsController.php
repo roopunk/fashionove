@@ -68,7 +68,7 @@ class ProductsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the product
      *
      * @param  int  $id
      * @return Response
