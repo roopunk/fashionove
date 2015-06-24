@@ -7,7 +7,7 @@ Documentation for the framework can be found on the [Laravel website](http://lar
 ## Contributing
 
 Sarnodeep Agarwala
--Assistant Developer
+-Assistant Developer (Fashionove.com)
 
 ### License
 
