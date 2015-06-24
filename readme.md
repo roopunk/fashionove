@@ -6,7 +6,7 @@ Documentation for the framework can be found on the [Laravel website](http://lar
 
 ## Contributing
 
-Sarnodeep Agarwala
+Sarnodeep Agarwala here
 
 ### License
 
