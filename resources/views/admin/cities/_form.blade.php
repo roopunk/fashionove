@@ -1,6 +1,6 @@
 <div class="form-group">
     {!! Form::label('city_name', 'City Name:') !!}
-    {!! Form::text('city_name',null,['class'=>'form-control']) !!}
+    {!! Form::text('city_name',null,['class'=>'form-control validate-alpha']) !!}
 </div>
 
 <div class="form-group">
