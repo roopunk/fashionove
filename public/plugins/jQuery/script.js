@@ -49,22 +49,24 @@ jQuery(function () {
         that.find('[name]').each(function (index, value) {
             var that = $(this),
                         name = that.attr('name'),
-                        msg = that.attr('data-error-msg');
+                        msg = that.attr('data-error-msg'),
+                        msg='<span class="error" style="color:red;padding:3px;"><small><span class="glyphicon glyphicon-ban-circle"></span> '+ msg +' </small></span>',
+                        blnk_msg='<span class="error" style="color:red;padding:3px;"><small><span class="glyphicon glyphicon-ban-circle"></span> This field is required</small></span>',
             value = that.val();
 
             if (value == "" && (that.hasClass('validate') || that.hasClass('validate-email') || that.hasClass('validate-alpha'))) {
-                $(this).after('<span class="error" style="color:red;padding:3px;"><small><span class="glyphicon glyphicon-ban-circle"></span> This filled must be filled </small></span>');
+                $(this).after(blnk_msg);
                 $(this).parent().addClass(' has-error');
                 flag = 0;
             }
             else if (that.hasClass('validate-email') && !val_email.test(value)) {
-                $(this).after('<span class="error" style="color:red;padding:3px;"><small><span class="glyphicon glyphicon-ban-circle"></span>' + msg + '</small></span>');
+                $(this).after(msg);
                 $(this).parent().addClass(' has-error');
                 flag = 0;
             }
             else if (that.hasClass('validate-alpha') && !val_alpha.test(value)) {
                 $(this).parent().addClass(' has-error');
-                $(this).after('<span class="error" style="color:red;padding:3px;"><small><span class="glyphicon glyphicon-ban-circle"></span> Plaese enter a valid name  </small></span>');
+                $(this).after(msg);
                 flag = 0;
             }
             else if (that.hasClass("validate") || that.hasClass('validate-email') || that.hasClass('validate-alpha')) {
@@ -78,7 +80,6 @@ jQuery(function () {
         });
 
         if (flag === 1) {
-            //alert(url);
             return true;
         }
         else {
