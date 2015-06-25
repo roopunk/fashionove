@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
@@ -108,6 +109,7 @@ class ProductsController extends Controller
     }
 
     public function get_stores($id, Request $request){
-        return $stores =  Brand::find($request->brand_id)->brands()->get()->lists('store_name','id');
+        $stores =  Brand::find($request->brand_id)->brands()->get()->lists('store_name','id');
+        return $stores;
     }
 }

@@ -101,15 +101,20 @@ jQuery(function () {
     });
 
     $('#brand_id_product_edit').change(function(){
+        var that = $(this);
         $.ajax({
             url:'get_stores',
             type:'GET',
+            dataType:'json',
             data:{
                 _token:$('#_token').val(),
                 brand_id:$(this).find('option:selected').val()
             },
             success:function(data){
-                alert(data)
+                if(data != ''){
+                    //console.log(data.id);
+                    //that.after('<div>'+data+'</div>');
+                }
             }
         })
     });
