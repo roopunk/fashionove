@@ -12,7 +12,7 @@ class CreateProductToStoreMap extends Migration
      */
     public function up()
     {
-        Schema::create('product_to_store_map',function(Blueprint $table){
+        Schema::create('product_to_store_maps',function(Blueprint $table){
             $table->increments('id');
             $table->integer('product_id')->unsigned();
             $table->integer('store_id')->unsigned();
@@ -20,7 +20,8 @@ class CreateProductToStoreMap extends Migration
 
             $table->foreign('product_id')
                 ->references('id')
-                ->on('products');
+                ->on('products')
+                ->onDelete('cascade');
         });
     }
 
@@ -31,6 +32,6 @@ class CreateProductToStoreMap extends Migration
      */
     public function down()
     {
-        Schema::drop('product_to_store_map');
+        Schema::drop('product_to_store_maps');
     }
 }

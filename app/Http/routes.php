@@ -21,3 +21,5 @@ Route::resource('admin/brands','BrandsController');
 Route::resource('admin/stores','StoresController');
 Route::resource('admin/products','ProductsController');
 Route::resource('admin/categories','CategoriesController');
+
+Route::get('admin/products/{products}/get_stores','ProductsController@get_stores');

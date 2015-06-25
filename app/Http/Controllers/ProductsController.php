@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Brand;
 use App\Product;
+use App\ProductToStoreMap;
+use App\Store;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -36,7 +40,7 @@ class ProductsController extends Controller
      *
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Requests\ProductRequest $request)
     {
 
         Product::create($request->all());
@@ -63,7 +67,19 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        return view('admin.products.edit',compact('product'));
+        $brands = Brand::lists('brand_name','id')->all();
+        $obj = DB::table('product_to_store_maps')->where('product_id', '=', $id)->first();
+
+        if($obj){
+            $temp = ProductToStoreMap::find($obj->id);
+            $temp->product_id = $id;
+            $temp->update();
+        }else{
+            $product_to_store_map = new ProductToStoreMap();
+            $product_to_store_map->product_id = $id;
+            $product_to_store_map->save();
+        }
+        return view('admin.products.edit',compact('product','brands'));
 
     }
 
@@ -73,7 +89,7 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id, Request $request)
+    public function update($id, Requests\ProductRequest $request)
     {
         $product = Product::find($id);
         $product->update($request->all());
@@ -89,5 +105,9 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         Product::destroy($id);
+    }
+
+    public function get_stores($id, Request $request){
+        return $stores =  Brand::find($request->brand_id)->brands()->get()->lists('store_name','id');
     }
 }

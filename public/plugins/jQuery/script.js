@@ -100,4 +100,17 @@ jQuery(function () {
 
     });
 
+    $('#brand_id_product_edit').change(function(){
+        $.ajax({
+            url:'get_stores',
+            type:'GET',
+            data:{
+                _token:$('#_token').val(),
+                brand_id:$(this).find('option:selected').val()
+            },
+            success:function(data){
+                alert(data)
+            }
+        })
+    });
 })

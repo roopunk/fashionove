@@ -12,7 +12,7 @@ class CreateCategoriesToStoreMapTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories_to_stores_map',function(Blueprint $table){
+        Schema::create('categories_to_stores_maps',function(Blueprint $table){
             $table->increments('id');
             $table->integer('store_id')->unsigned();
             $table->integer('category_id')->unsigned();
@@ -36,6 +36,6 @@ class CreateCategoriesToStoreMapTable extends Migration
      */
     public function down()
     {
-        Schema::drop('categories_to_stores_map');
+        Schema::drop('categories_to_stores_maps');
     }
 }

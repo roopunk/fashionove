@@ -4,9 +4,11 @@
         <hr/>
         <a href="{{action('ProductsController@create')}}"> {!! Form::button('Add New Product',['class'=>'btn btn-primary']) !!}</a>
         <hr/>
-        {!! Form::open(['action'=>'ProductsController@index']) !!}
+        @include('errors.list')
+        <div class="col-md-6">
+        {!! Form::open(['action'=>'ProductsController@index','class'=>'ajax-validation']) !!}
             @include('admin.products._form',['submitButtonText'=>'Add Product'])
         {!! Form::close() !!}
-        @include('errors.list')
+        </div>
     </div>
 @stop
