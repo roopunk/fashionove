@@ -18,7 +18,7 @@ jQuery(function () {
 
     $('.ajax-validation').on('submit', function (event) {
         /* this class validate fields and send data to server
-        * according the method
+        * according the method 
         * class  of the form must be validation
         * the validate class should be added to the field 
         */

@@ -49,6 +49,7 @@ class CitiesController extends Controller
         }else{
             City::create($request->all());
             return redirect('admin/cities');
+
         }
 
     }
