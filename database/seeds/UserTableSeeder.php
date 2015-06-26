@@ -14,9 +14,12 @@ class UserTableSeeder extends Seeder
     {
         $faker = Faker::create();
         DB::table('users')->insert([
-           'name' => $faker->name,
+          // 'name' => $faker->name,
+            'first_name' => $faker->firstName ,
+            'last_name' => $faker->lastName,
+            'mobile' =>$faker->phoneNumber,
             'email' => $faker->unique()->email,
-            'password'=>bcrypt('secret'),
+            'password' =>bcrypt('secret'),
         ]);
     }
 }

@@ -23,6 +23,7 @@ class Authenticate
     public function __construct(Guard $auth)
     {
         $this->auth = $auth;
+
     }
 
     /**
@@ -32,11 +33,12 @@ class Authenticate
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+
+    public function handle($request, Closure $next, $role = false)
     {
         if ($this->auth->guest()) {
             if ($request->ajax()) {
-                return response('Unauthorized.', 401);
+                    return response('Unauthorized.', 401);
             } else {
                 return redirect()->guest('auth/login');
             }
@@ -44,4 +46,5 @@ class Authenticate
 
         return $next($request);
     }
+
 }

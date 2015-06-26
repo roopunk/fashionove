@@ -17,6 +17,11 @@
         <input type="email" name="email" value="{{ old('email') }}">
     </div>
 
+    <div class="col-md-6">
+        Last Name<br>
+        <input type="text" name="mobile" value="{{ old('mobile') }}">
+    </div>
+
     <div>
         Password<br>
         <input type="password" name="password">

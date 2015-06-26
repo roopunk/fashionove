@@ -13,6 +13,8 @@ class AdminDashboardController extends Controller
      * @return Admin Dashboard Index View
      *
      */
+
+
     public function index(){
         return view('admin.dashboard',compact('dashboard_title','band_name'));
     }
