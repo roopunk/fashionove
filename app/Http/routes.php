@@ -15,7 +15,7 @@
   //  return view('welcome');
 //});
 
-Route::get('admin/','AdminDashboardController@index');
+Route::get('admin/',['middleware' => 'auth','middleware'=>'admin', 'uses' => 'AdminDashboardController@index']);
 Route::resource('admin/cities','CitiesController');
 Route::resource('admin/brands','BrandsController');
 Route::resource('admin/stores','StoresController');
@@ -28,19 +28,11 @@ Route::controllers([
 ]);
 
 
-Route::get('/', ['middleware' => 'auth', function() {
+Route::get('/', ['middleware' => 'auth:admin', function() {
     // Only authenticated users may enter...
     return view('welcome');
 }]);
-/*
-Route::get('admin/index',function(){
-    return view('admin.home');
-});
-*/
 
-//Route::get('admin/index', ['middleware' => 'auth:true', function () {
-  //  return view('admin.home');
-//}]);
-Route::get('foo',['middleware'=>'auth:admin',function(){
+Route::get('foo',['middleware'=>'auth','middleware'=>'admin', function(){
     return 'It\'s Ok';
 }]);
