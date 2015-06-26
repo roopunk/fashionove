@@ -15,6 +15,6 @@ Route::resource('admin/categories','CategoriesController');
 Route::post('admin/products/{products}/get_stores','ProductsController@get_stores');
 
 Route::controllers([
-    'auth' => 'auth\AuthController',
+        'auth' => 'auth\AuthController',
     'password' => 'auth\PasswordController',
 ]);

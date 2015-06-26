@@ -100,9 +100,10 @@ jQuery(function () {
 
     });
 
-    var checkbox="";
     $('#brand_id_product_edit').change(function(){
         var that = $(this);
+        $('#product_edit_stores_list').html('');
+        var checkbox="";
         $.ajax({
             url:'get_stores',
             type:'POST',
@@ -114,9 +115,12 @@ jQuery(function () {
             success:function(data){
                 if(data != ''){
                     for(i=0;i<data.length;i++){
-                        checkbox +='<input type="checkbox" value="'+data[i].id+'"/>'+data[i].store_name;
+                        checkbox +='<div class="checkbox"><label><input type="checkbox" value="'+data[i].id+'">'+data[i].store_name+'</label></div>';
                     }
-                    that.after(checkbox);
+                    $('#product_edit_stores_list').html(checkbox);
+                }else{
+                    checkbox = '<b>No Stores Found!!</b>';
+                    $('#product_edit_stores_list').html(checkbox);
                 }
             }
         })

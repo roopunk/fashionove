@@ -16,6 +16,9 @@
                 {!! Form::label('brand_id', 'Brand Name:') !!}
                 {!! Form::select('brand_id',$brands,@$selected_brand->id,['class'=>'form-control','id'=>'brand_id_product_edit']) !!}
             </div>
+            <div class="form-group" id="product_edit_stores_list">
+
+            </div>
         </div>
 
     </div>

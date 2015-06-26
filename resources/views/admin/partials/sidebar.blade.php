@@ -33,7 +33,7 @@
             <li class="header">Manage</li>
             <li><a href="{{action('BrandsController@index')}}"><i class="fa fa-list"></i> <span>Brands</span></a></li>
             <li><a href="{{action('StoresController@index')}}"><i class="fa fa-university"></i> <span>Stores</span></a></li>
-            <li><a href="{{action('ProductsController@index')}}"><i class="fa fa-cube"></i> <span>Products</span></a></li>
+            <li><a href="{{action('ProductsController@index')}}"><i class="fa fa-barcode"></i> <span>Products</span></a></li>
             <li class="header">Others</li>
             <li><a href="{{action('CategoriesController@index')}}"><i class="fa fa-list-ul"></i> <span>Categories</span></a></li>
             <li><a href="{{action('CitiesController@index')}}"><i class="fa fa-book"></i> <span>Cities</span></a></li>

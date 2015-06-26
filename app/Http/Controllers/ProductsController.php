@@ -118,7 +118,7 @@ class ProductsController extends Controller
 
     public function get_stores($id, Request $request){
         ProductToStoreMap::where('product_id','=',$id)->update(['brand_id'=>$request->brand_id]);
-        //$stores =  Brand::find($request->brand_id)->brands()->get();
-//        return json_encode($stores);
+        $stores =  Brand::find($request->brand_id)->brands()->get();
+        return json_encode($stores);
     }
 }

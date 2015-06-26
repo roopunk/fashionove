@@ -25,8 +25,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories_men = Category::all()->where('gender_id','1');
-        $categories_women = Category::all()->where('gender_id','2');
+        $categories_men = Category::all()->where('gender_id',1);
+        $categories_women = Category::all()->where('gender_id',2);
         return view('admin.categories.index',compact('categories_men','categories_women'));
     }
 
