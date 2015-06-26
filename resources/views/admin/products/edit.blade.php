@@ -14,8 +14,9 @@
         <div class="col-md-6">
             <div class="form-group">
                 {!! Form::label('brand_id', 'Brand Name:') !!}
-                {!! Form::select('brand_id',$brands,null,['class'=>'form-control','id'=>'brand_id_product_edit']) !!}
+                {!! Form::select('brand_id',$brands,@$selected_brand->id,['class'=>'form-control','id'=>'brand_id_product_edit']) !!}
             </div>
         </div>
+
     </div>
 @stop

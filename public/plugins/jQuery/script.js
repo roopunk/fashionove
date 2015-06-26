@@ -100,11 +100,12 @@ jQuery(function () {
 
     });
 
+    var checkbox="";
     $('#brand_id_product_edit').change(function(){
         var that = $(this);
         $.ajax({
             url:'get_stores',
-            type:'GET',
+            type:'POST',
             dataType:'json',
             data:{
                 _token:$('#_token').val(),
@@ -112,8 +113,10 @@ jQuery(function () {
             },
             success:function(data){
                 if(data != ''){
-                    //console.log(data.id);
-                    //that.after('<div>'+data+'</div>');
+                    for(i=0;i<data.length;i++){
+                        checkbox +='<input type="checkbox" value="'+data[i].id+'"/>'+data[i].store_name;
+                    }
+                    that.after(checkbox);
                 }
             }
         })

@@ -72,15 +72,17 @@ class ProductsController extends Controller
         $obj = DB::table('product_to_store_maps')->where('product_id', '=', $id)->first();
 
         if($obj){
-            $temp = ProductToStoreMap::find($obj->id);
-            $temp->product_id = $id;
-            $temp->update();
+            $ptos = ProductToStoreMap::where('product_id','=',$id)->first();
+            $selected_brand = Brand::find($ptos->brand_id);
+            return view('admin.products.edit',compact('product','brands','selected_brand'));
         }else{
             $product_to_store_map = new ProductToStoreMap();
             $product_to_store_map->product_id = $id;
+            $product_to_store_map->brand_id = 1;
             $product_to_store_map->save();
+            return view('admin.products.edit',compact('product','brands'));
         }
-        return view('admin.products.edit',compact('product','brands'));
+
 
     }
 
@@ -109,7 +111,8 @@ class ProductsController extends Controller
     }
 
     public function get_stores($id, Request $request){
-        $stores =  Brand::find($request->brand_id)->brands()->get()->lists('store_name','id');
-        return $stores;
+        ProductToStoreMap::where('product_id','=',$id)->update(['brand_id'=>$request->brand_id]);
+        //$stores =  Brand::find($request->brand_id)->brands()->get();
+//        return json_encode($stores);
     }
 }
