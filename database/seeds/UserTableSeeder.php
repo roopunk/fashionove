@@ -18,7 +18,8 @@ class UserTableSeeder extends Seeder
             'first_name' => $faker->firstName ,
             'last_name' => $faker->lastName,
             'mobile' =>$faker->phoneNumber,
-            'email' => $faker->unique()->email,
+            'is_admin'=>1,
+            'email' => 'example@admin.com',
             'password' =>bcrypt('secret'),
         ]);
     }
