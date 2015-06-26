@@ -41,7 +41,6 @@ Route::get('admin/index',function(){
 //Route::get('admin/index', ['middleware' => 'auth:true', function () {
   //  return view('admin.home');
 //}]);
-Route::get('foo',['middleware'=>'admin',function(){
-   // return \Illuminate\Support\Facades\Auth::user()->is_admin;
+Route::get('foo',['middleware'=>'auth:admin',function(){
     return 'It\'s Ok';
 }]);

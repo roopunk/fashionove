@@ -20,5 +20,5 @@ class RedirectIfNotAdmin
         }
         return $next ($request);
     }
-    
+
 }
