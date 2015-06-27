@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductToStoreMap extends Migration
+class CreateProductToStoreMapTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,16 +16,16 @@ class CreateProductToStoreMap extends Migration
             $table->increments('id');
             $table->integer('product_id')->unsigned();
             $table->integer('store_id')->unsigned();
-            $table->integer('brand_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('product_id')
                 ->references('id')
                 ->on('products')
                 ->onDelete('cascade');
-            $table->foreign('brand_id')
+
+            $table->foreign('store_id')
                 ->references('id')
-                ->on('brands')
+                ->on('stores')
                 ->onDelete('cascade');
         });
     }

@@ -2,7 +2,7 @@
 @section('content')
     <div class="container" style="width: 1071px !important;">
         <hr/>
-        <a href="{{action('StoresController@create')}}"> {!! Form::button('Add New Brand',['class'=>'btn btn-primary']) !!}</a>
+        <a href="{{action('StoresController@create')}}"> {!! Form::button('Add New Store',['class'=>'btn btn-primary']) !!}</a>
         <hr/>
         <table class="table table-responsive table-striped text-center">
             <tr>

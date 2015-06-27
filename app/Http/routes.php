@@ -13,6 +13,8 @@ Route::resource('admin/products','ProductsController');
 Route::resource('admin/categories','CategoriesController');
 
 Route::post('admin/products/{products}/get_stores','ProductsController@get_stores');
+Route::post('admin/products/{products}/update_store_id','ProductsController@update_store_id');
+Route::post('admin/products/{products}/delete_store_id','ProductsController@delete_store_id');
 
 Route::controllers([
         'auth' => 'auth\AuthController',

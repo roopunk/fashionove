@@ -100,7 +100,7 @@ jQuery(function () {
 
     });
 
-    $('#brand_id_product_edit').change(function(){
+    $(document).on('change','#brand_id_product_edit',function(){
         var that = $(this);
         $('#product_edit_stores_list').html('');
         var checkbox="";
@@ -124,5 +124,35 @@ jQuery(function () {
                 }
             }
         })
+    });
+    $(document).on('click','#product_edit_stores_list input[type="checkbox"]',function(){
+        var store_id = $(this).val();
+       if($(this).is(':checked')){
+           $.ajax({
+               url:'update_store_id',
+               type:'POST',
+               dataType:'json',
+               data:{
+                   _token:$('#_token').val(),
+                   store_id:store_id
+               },
+               success:function(data){
+
+               }
+           })
+       }else{
+           $.ajax({
+               url:'delete_store_id',
+               type:'POST',
+               dataType:'json',
+               data:{
+                   _token:$('#_token').val(),
+                   store_id:store_id
+               },
+               success:function(data){
+
+               }
+           })
+       }
     });
 })
