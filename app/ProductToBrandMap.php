@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductToBrandMap extends Model
 {
-    public function brand_name(){
+    public function getBrand(){
         return $this->belongsTo('\App\Brand');
     }
 }
