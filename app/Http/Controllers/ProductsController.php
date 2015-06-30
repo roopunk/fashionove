@@ -13,6 +13,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class ProductsController extends Controller
 {
@@ -29,7 +30,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+
+        $products = Product::latest()->paginate(10);
         return view('admin.products.index',compact('products'));
     }
 
@@ -145,5 +147,11 @@ class ProductsController extends Controller
     }
     public function delete_store_id($id, Request $request){
         ProductToStoreMap::where('store_id','=',$request->store_id)->delete();
+    }
+    public function upload(Request $request){
+        $ext = Input::file('image');
+
+        $destinationPath = public_path().sprintf("/photos/");
+        $request->file('image')->move($destinationPath,rand(1111,9999).'.'.$ext->guessExtension());
     }
 }

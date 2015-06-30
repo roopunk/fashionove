@@ -3,8 +3,9 @@
     <div class="container" style="width: 1071px !important;">
         <hr/>
         <a href="{{action('ProductsController@create')}}"> {!! Form::button('Add New Product',['class'=>'btn btn-primary']) !!}</a>
+        <a href="#"> {!! Form::button('Import CSV',['class'=>'btn btn-primary']) !!}</a>
         <hr/>
-        <table class="table table-responsive table-striped text-center">
+        <table class="table table-responsive text-center">
             <tr>
                 <th>Serial Id</th>
                 <th>Product Name</th>
@@ -12,10 +13,12 @@
                 <th>Price</th>
                 <th>Operations</th>
             </tr>
+            <?php $count=1; ?>
             @foreach($products as $product)
-                <tr>
+                <?php $temp = \App\ProductToBrandMap::where('product_id','=',$product->id)->get() ?>
+                <tr class="{{(count($temp) >= 1)?"bg-success":"bg-danger"}}">
 
-                    <td>{{$product->id}}</td>
+                    <td>{{$count}}</td>
                     <td>{{$product->product_name}}</td>
                     <td>{{$product->description}}</td>
                     <td>{{$product->price}}</td>
@@ -25,7 +28,9 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     </td>
                 </tr>
+                <?php $count++?>
             @endforeach
         </table>
+        {!! $products->render() !!}
     </div>
 @stop

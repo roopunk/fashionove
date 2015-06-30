@@ -14,6 +14,8 @@
     <link href="{{URL::asset('plugins/jvectormap/jquery-jvectormap-1.2.2.css')}}" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="{{URL::asset('dist/css/AdminLTE.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap 3.3.4 -->
+    <link href="{{URL::asset('bootstrap/css/style.css')}}" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link href="{{URL::asset('dist/css/skins/_all-skins.min.css')}}" rel="stylesheet" type="text/css" />

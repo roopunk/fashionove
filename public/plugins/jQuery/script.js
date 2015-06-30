@@ -155,4 +155,67 @@ jQuery(function () {
            })
        }
     });
-})
+
+    $(document).on('change', '.btn-file :file', function() {
+        var input = $(this),
+            numFiles = input.get(0).files ? input.get(0).files.length : 1,
+            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
+
+        var file = this.files[0];
+        var name = file.name;
+        var size = file.size;
+        var type = file.type;
+        var formData = new FormData($('#upload')[0]);
+        $.ajax({
+            url: 'http://localhost/fashionove/public/admin/products/upload',  //Server script to process data
+            type: 'POST',
+            xhr: function() {  // Custom XMLHttpRequest
+                var myXhr = $.ajaxSettings.xhr();
+                if(myXhr.upload){ // Check if upload property exists
+                    myXhr.upload.addEventListener('progress',progressHandlingFunction, false); // For handling the progress of the upload
+                }
+                return myXhr;
+            },
+            //Ajax events
+            beforeSend: function(){
+                $('.progress').show();
+            },
+            success: function(data){
+                $('.progress').fadeOut();
+            },
+            error: function(){
+
+            },
+            complete:function(){
+
+            },
+            // Form data
+            data: formData,
+            //Options to tell jQuery not to process data or worry about content-type.
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    });
+
+        $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+
+            var input = $(this).parents('.input-group').find(':text'),
+                log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+            if( input.length ) {
+                input.val(log);
+            } else {
+                if( log ) alert(log);
+            }
+
+        });
+
+});
+function progressHandlingFunction(e){
+    if(e.lengthComputable){
+        $('.progress-bar').css('width', e.loaded+'%').attr('aria-valuenow', e.loaded);
+        //$('progress').attr({value:e.loaded,max:e.total});
+    }
+}
