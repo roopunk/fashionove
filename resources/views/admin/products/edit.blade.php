@@ -17,7 +17,9 @@
                 {!! Form::select('brand_id',$brands,@$selected_brand->id,['class'=>'form-control','id'=>'brand_id_product_edit']) !!}
             </div>
             <div class="form-group" id="product_edit_stores_list">
-
+                @foreach(@$stores as $store)
+                    <div class="checkbox"><label><input type="checkbox" value="{{$store->id}}" {{in_array($store->id,$selected_store)?"checked":""}}>{{$store->store_name}}</label></div>
+                    @endforeach
             </div>
         </div>
 
