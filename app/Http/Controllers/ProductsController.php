@@ -93,7 +93,15 @@ class ProductsController extends Controller
             $product_to_brand_map->product_id = $id;
             $product_to_brand_map->brand_id = 1;
             $product_to_brand_map->save();
-            return view('admin.products.edit',compact('product','brands'));
+            $ptos = ProductToBrandMap::where('product_id','=',$id)->first();
+            $selected_brand = Brand::find($ptos->brand_id);
+            $stores = Store::all()->where('brand_id',$ptos->brand_id);
+            $selected_stores = ProductToStoreMap::where('product_id','=',$id)->get();
+            $selected_store = [];
+            foreach($selected_stores as $s){
+                array_push($selected_store,$s->store_id);
+            }
+            return view('admin.products.edit',compact('product','brands','selected_brand','stores','selected_store'));
         }
 
 
