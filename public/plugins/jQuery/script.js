@@ -103,7 +103,7 @@ jQuery(function () {
     $(document).on('change','#brand_id_product_edit',function(){
         var that = $(this);
         $('#product_edit_stores_list').html('');
-        var checkbox="";
+        var checkbox="<label>Store Name:</label>";
         $.ajax({
             url:'get_stores',
             type:'POST',
@@ -168,7 +168,7 @@ jQuery(function () {
         var type = file.type;
         var formData = new FormData($('#upload')[0]);
         $.ajax({
-            url: 'http://localhost/fashionove/public/admin/products/upload',  //Server script to process data
+            url: 'upload',  //Server script to process data
             type: 'POST',
             xhr: function() {  // Custom XMLHttpRequest
                 var myXhr = $.ajaxSettings.xhr();
@@ -177,12 +177,14 @@ jQuery(function () {
                 }
                 return myXhr;
             },
+            data:{brand_id:$('#brand_id_product_edit').find('option:selected').val()},
             //Ajax events
             beforeSend: function(){
                 $('.progress').show();
             },
             success: function(data){
                 $('.progress').fadeOut();
+                $('#image-container').append('<div class="col-sm-6 col-md-4"><div class="thumbnail"><img src="http://localhost/fashionove/public/photos/'+data+'" alt="sdd"></div></div>');
             },
             error: function(){
 

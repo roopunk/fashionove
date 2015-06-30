@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Brand;
 use App\Product;
+use App\ProductImage;
 use App\ProductToBrandMap;
 use App\ProductToStoreMap;
 use App\Store;
@@ -89,7 +90,8 @@ class ProductsController extends Controller
             foreach($selected_stores as $s){
                 array_push($selected_store,$s->store_id);
             }
-            return view('admin.products.edit',compact('product','brands','selected_brand','stores','selected_store'));
+            $images = ProductImage::where('product_id','=',$id)->get();
+            return view('admin.products.edit',compact('product','brands','selected_brand','stores','selected_store','images'));
         }else{
             $product_to_brand_map = new ProductToBrandMap();
             $product_to_brand_map->product_id = $id;
@@ -103,7 +105,8 @@ class ProductsController extends Controller
             foreach($selected_stores as $s){
                 array_push($selected_store,$s->store_id);
             }
-            return view('admin.products.edit',compact('product','brands','selected_brand','stores','selected_store'));
+            $images = ProductImage::where('product_id','=',$id)->get();
+            return view('admin.products.edit',compact('product','brands','selected_brand','stores','selected_store','images'));
         }
 
 
@@ -148,10 +151,17 @@ class ProductsController extends Controller
     public function delete_store_id($id, Request $request){
         ProductToStoreMap::where('store_id','=',$request->store_id)->delete();
     }
-    public function upload(Request $request){
-        $ext = Input::file('image');
+    public function upload($id,Request $request){
 
+        $ext = Input::file('image');
         $destinationPath = public_path().sprintf("/photos/");
-        $request->file('image')->move($destinationPath,rand(1111,9999).'.'.$ext->guessExtension());
+        $filename = time().'.'.$ext->guessExtension();
+        $request->file('image')->move($destinationPath,$filename);
+
+        $product_image = new ProductImage();
+        $product_image->product_id = $id;
+        $product_image->image_name = $filename;
+        $product_image->save();
+        return $filename;
     }
 }

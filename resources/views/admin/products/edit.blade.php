@@ -17,10 +17,12 @@
                 {!! Form::select('brand_id',$brands,@$selected_brand->id,['class'=>'form-control','id'=>'brand_id_product_edit']) !!}
             </div>
             <div class="form-group" id="product_edit_stores_list">
+                <label>Store Name:</label>
                 @foreach($stores as $store)
                     <div class="checkbox"><label><input type="checkbox" value="{{$store->id}}" {{in_array($store->id,$selected_store)?"checked":""}}>{{$store->store_name}}</label></div>
                     @endforeach
             </div>
+            {!! Form::label('image', 'Image Name:') !!}
             {!! Form::open(['action'=>'ProductsController@upload','files'=>true,'id'=>'upload']) !!}
             <div class="input-group">
                 <span class="input-group-btn">
@@ -31,10 +33,20 @@
                 <input type="text" class="form-control" readonly="">
             </div>
             {!! Form::close() !!}
+            <br/>
             <div class="progress"style="display: none">
-                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                     <span class="sr-only">10% Complete</span>
                 </div>
+            </div>
+            <div id="image-container" class="row">
+                @foreach($images as $image)
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="http://localhost/fashionove/public/photos/{{$image->image_name}}" alt="sdd">
+                    </div>
+                </div>
+                @endforeach
             </div>
         </div>
 
