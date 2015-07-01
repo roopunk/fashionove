@@ -13,6 +13,10 @@
         <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}" />
         <div class="col-md-6">
             <div class="form-group">
+                {!! Form::label('category_id', 'Category Name:') !!}
+                {!! Form::select('category_id',$categories,$selected_category,['class'=>'form-control','id'=>'category_id_product_edit']) !!}
+            </div>
+            <div class="form-group">
                 {!! Form::label('brand_id', 'Brand Name:') !!}
                 {!! Form::select('brand_id',$brands,@$selected_brand->id,['class'=>'form-control','id'=>'brand_id_product_edit']) !!}
             </div>

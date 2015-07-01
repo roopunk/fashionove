@@ -18,7 +18,7 @@ class CreateGenderTable extends Migration
         });
 
         DB::table('genders')->insert([
-            ['gender_name'=>'Male'],
+            ['gender_name'=>'Men'],
             ['gender_name'=>'Women']
         ]);
     }

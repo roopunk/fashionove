@@ -125,6 +125,20 @@ jQuery(function () {
             }
         })
     });
+    $(document).on('change','#category_id_product_edit',function(){
+        $.ajax({
+            url:'update_category',
+            type:'POST',
+            dataType:'json',
+            data:{
+                _token:$('#_token').val(),
+                category_id:$(this).find('option:selected').val()
+            },
+            success:function(data){
+                alert(data);
+            }
+        })
+    });
     $(document).on('click','#product_edit_stores_list input[type="checkbox"]',function(){
         var store_id = $(this).val();
        if($(this).is(':checked')){

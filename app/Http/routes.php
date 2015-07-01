@@ -16,6 +16,7 @@ Route::post('admin/products/{products}/get_stores','ProductsController@get_store
 Route::post('admin/products/{products}/update_store_id','ProductsController@update_store_id');
 Route::post('admin/products/{products}/delete_store_id','ProductsController@delete_store_id');
 Route::post('admin/products/{products}/upload','ProductsController@upload');
+Route::post('admin/products/{products}/update_category','ProductsController@update_category');
 
 Route::controllers([
         'auth' => 'auth\AuthController',

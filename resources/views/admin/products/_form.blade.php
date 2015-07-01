@@ -1,4 +1,8 @@
 <div class="form-group">
+    {!! Form::label('gender_id', 'Gender:') !!}
+    {!! Form::select('gender_id',$gender,null,['class'=>'form-control']) !!}
+</div>
+<div class="form-group">
     {!! Form::label('product_name', 'Product Name:') !!}
     {!! Form::text('product_name',null,['class'=>'form-control validate']) !!}
 </div>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Brand;
+use App\Category;
+use App\Gender;
 use App\Product;
 use App\ProductImage;
 use App\ProductToBrandMap;
@@ -43,7 +45,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+        $gender = Gender::lists('gender_name','id')->all();
+        return view('admin.products.create',compact('gender'));
     }
 
     /**
@@ -53,8 +56,16 @@ class ProductsController extends Controller
      */
     public function store(Requests\ProductRequest $request)
     {
+        $product = new Product();
+        $product->gender_id = $request->gender_id;
+        $product->category_id = 1;
+        $product->product_name = $request->product_name;
+        $product->description = $request->description;
+        $product->price = $request->price;
 
-        Product::create($request->all());
+        $product->save();
+
+       // Product::create($request->all());
         return redirect('admin/products');
     }
 
@@ -90,8 +101,12 @@ class ProductsController extends Controller
             foreach($selected_stores as $s){
                 array_push($selected_store,$s->store_id);
             }
+
+            $categories = Category::where('gender_id',$product->gender_id)->lists('category_name','id');
+            $selected_category = $product->category_id;
             $images = ProductImage::where('product_id','=',$id)->get();
-            return view('admin.products.edit',compact('product','brands','selected_brand','stores','selected_store','images'));
+            $gender = Gender::lists('gender_name','id')->all();
+            return view('admin.products.edit',compact('product','brands','selected_brand','stores','selected_store','images','gender','categories','selected_category'));
         }else{
             $product_to_brand_map = new ProductToBrandMap();
             $product_to_brand_map->product_id = $id;
@@ -105,8 +120,11 @@ class ProductsController extends Controller
             foreach($selected_stores as $s){
                 array_push($selected_store,$s->store_id);
             }
+            $categories = Category::where('gender_id',$product->gender_id)->lists('category_name','id');
+            $selected_category = $product->category_id;
             $images = ProductImage::where('product_id','=',$id)->get();
-            return view('admin.products.edit',compact('product','brands','selected_brand','stores','selected_store','images'));
+            $gender = Gender::lists('gender_name','id')->all();
+            return view('admin.products.edit',compact('product','brands','selected_brand','stores','selected_store','images','gender','categories','selected_category'));
         }
 
 
@@ -135,7 +153,11 @@ class ProductsController extends Controller
     {
         Product::destroy($id);
     }
-
+    public function update_category($id, Request $request){
+        $product = Product::find($id);
+        $product->category_id = $request->category_id;
+        $product->update();
+    }
     public function get_stores($id, Request $request){
         ProductToBrandMap::where('product_id','=',$id)->update(['brand_id'=>$request->brand_id]);
         ProductToStoreMap::where('product_id','=',$id)->delete();
